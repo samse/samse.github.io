@@ -60,6 +60,10 @@ function onSongSelected(index) {
   const song = albums[index];
 
   /// bind song info below playing-info
+  musicListScreen.querySelector('.avatar').src = song.cover;
+  musicListScreen.querySelector('.music-title').innerText = song.title;
+  musicListScreen.querySelector('.music-genre').innerText = song.genre;
+
   musicListScreen.querySelector('.media-control__author').innerText = song.author;
   musicListScreen.querySelector('.media-control__title').innerText = song.title;
 
