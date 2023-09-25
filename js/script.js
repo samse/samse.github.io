@@ -53,11 +53,17 @@ let selectedIndex = 0;
 
 function onSongSelected(index) {
   console.log(`Song ${albums[index].title} selected`);
+
   musicListScreen.classList.add(HIDDEN_CLASS);
   musicPlayScreen.classList.remove(HIDDEN_CLASS);
+  
+  const song = albums[index];
+
+  /// bind song info below playing-info
+  musicListScreen.querySelector('.media-control__author').innerText = song.author;
+  musicListScreen.querySelector('.media-control__title').innerText = song.title;
 
   /// bind song info to play-screen
-  const song = albums[index];
   musicPlayScreen.querySelector('.playing-cover__img img').src = song.cover;
   musicPlayScreen.querySelector('.playing-info span:first-child').innerText = song.title;
   musicPlayScreen.querySelector('.playing-info span:last-child').innerText = song.author;
