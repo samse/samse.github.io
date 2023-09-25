@@ -1,82 +1,71 @@
+@import url(avatar.css);
+@import url(song.css);
+@import url(media-control.css);
+@import url(play-screen.css);
+@import url(progress-bar.css);
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
 .hidden {
   display: none;
 }
 
-body {
-  background-image: url('https://source.unsplash.com/random?sig=110');
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100vh;
-}
+.music-list-screen {}
 
 
-.date-bar {
-  display: flex;
-  flex-direction: row;
-  background-color: transparent;
-  justify-content: space-between; /* 가로 중앙 정렬 */
-}
-
-.date-bar__clock {
-  background-color: aliceblue;
-  background-color: transparent;
-}
-
-.date-bar__clock__time {
-  font-size: 86pt;
+.music-title {
+  font-size: 32px;
   font-weight: 600;
-  -webkit-text-stroke: 1px whitesmoke; /* 테두리 두께 및 색상 설정 */
-  color: white;
-  
-}
-.date_bar__clock__date {
-  font-size: 40pt;
-  -webkit-text-stroke: 1px whitesmoke; /* 테두리 두께 및 색상 설정 */
-  color: white;
-}
-
-#login-form {
-  display: flex;
-  flex-direction: column;
-  margin-top: 100px;
-}
-
-#login-form input {
-  border: none;
-  padding: 10px 0px;
-  font-size: 18px;
-  margin-bottom: 10px;
-  border-radius: 4px;
-}
-
-#login-form input:not([type="submit"]) {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  transition: border-color 0.3s ease-in-out;
-  border-radius: 0px;
-}
-
-#login-form input[type="submit"] {
-  background-color: orange;
-  cursor: pointer;
-}
-
-#login-form input::placeholder {
-  color: rgba(0, 0, 0, 0.4);
-}
-
-#login-form input:focus {
-  border-color: yellow;
-}
-
-#login-form input:nth-child(2) {
-  margin-bottom: 30px;
-}
-
-#login-form a {
-  font-size: 52px;
   text-align: center;
 }
 
-.hide {
-  display: none;
+.music-genre {
+  color: rgba(0, 0, 0, 0.3);
+  margin-top: -30px;
+  text-align: center;
+}
+
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.title-bar {
+  display: flex;
+  padding: 10px 0px;
+  justify-content: space-between;
+}
+
+.center-btn {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 40px;
+}
+
+.center-btn__suffle {
+  padding: 10px 34px;
+  margin-right: 10px;
+  border-radius: 30px;
+  background-color: black;
+  color: white;
+  box-shadow: 0px 2px 10px grey;
+}
+
+.center-btn__like {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 30px;
+  background-color: white;
+  color: grey;
+  box-shadow: 0px 2px 10px grey;
+}
+
+
+
+.music-play-screen {
+  
 }

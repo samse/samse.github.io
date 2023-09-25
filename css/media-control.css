@@ -1,0 +1,64 @@
+.media-control {
+  position: fixed;
+  bottom: 60px;
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  height: 60px;
+  margin-left: 5%;
+  border-radius: 50px;
+  background-color: black;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.media-control__songinfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.media-control__author {
+  color: white;
+  font-size: 12px;
+  margin-left: 20px;
+}
+
+.media-control__title {
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+.media-control__controller {
+  display: flex;
+  align-items: center;
+}
+
+.media-control__controller i {
+  margin-right: 20px;
+  color: white;
+}
+
+.play-media-control {
+  display: flex;
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.play-media-control i:first-child {
+  color: grey;
+}
+
+.play-media-control i:last-child {
+  color: grey;
+}
+
+.play-media-control i:nth-child(3) {
+  color: black;
+  font-size: 3em;
+}
