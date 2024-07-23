@@ -4,9 +4,6 @@ nbridge.app = (function(nbridge) {
 		appInfo : function() {
 			return nbridge.callToNative(this.service, 'appInfo', {});
 		}, 
-		deviceInfo : function() { 
-			return nbridge.callToNative(this.service, 'deviceInfo', {});
-		},
         checkGps: function() {
             return nbridge.callToNative(this.service, "checkGps", {});
         },
