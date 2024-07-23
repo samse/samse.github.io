@@ -9,7 +9,7 @@ nbridge.app = (function(nbridge) {
 		},
         checkGps: function() {
             return nbridge.callToNative(this.service, "checkGps", {});
-        }
+        },
         checkPermissions: function(permissions) {
             return nbridge.callToNative(this.service, "checkPermissions", {permissions});
         },
