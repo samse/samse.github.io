@@ -6,9 +6,6 @@
 		<script src="jquery-3.4.1.js"></script>
 		<script src="nbridge.js"></script>
 		<script src="appBridge.js"></script>
-		<script src="authenticationBridge.js"></script>
-		<script src="linkBridge.js"></script>
-		<script src="locationBridge.js"></script>
 		<script src="preferenceBridge.js"></script>
 		<script src="uiBridge.js"></script>
 		<script type="text/javascript">
@@ -32,153 +29,15 @@
                     '\nlanguage : ' + result.language);
                 });
             }
-            function pushSettings() {
-                nbridge.app.pushSettings().then(function(result) {
-                    alert('isRegistered : ' + result.isRegistered +
-                    '\nallowReceiveNotification : ' + result.allowReceiveNotification);
-                });
-            }
-            function pushAllow() {
-                nbridge.app.allowReceivePush(true).then(function(result) {
-                    alert("allowed");
-                });
-            }
-            function pushDisallow() {
-                nbridge.app.allowReceivePush(false).then(function(result) {
-                    alert("disallowed");
-                });
-            }
 
 			function exit() {
 				nbridge.app.exit();
 			}
-			function update() {
-				nbridge.app.update();
+
+			function goSetting() {
+				nbridge.app.goSetting();
 			}
-            function setStatusBarColor(color) {
-                nbridge.app.setStatusBarColor(color);
-            }
-            
-            function log(level) {
-                var logStr = $("input[name='logInput'").val();
-                nbridge.app.log(level, logStr);
-            }
-            
-			/*AUTHENTICATION*/
-			function registerSAUser() {
-				var type = $("select[name='authType'").val();
-				var userName = $("input[name='authUserName'").val();
-                var userId = $("input[name='authUserId'").val();
-				nbridge.authentication.registerUser(type, userId, userName, false).then(function(result) {
-					console.log('result : ' + result);
-				}, function(error) { 
-					console.log('error : ' + error);
-				});
-			}
-            function changeProperty() {
-                var type = $("select[name='authType'").val();
-                var userName = $("input[name='authUserName'").val();
-                var userId = $("input[name='authUserId'").val();
-                if (type == 'bio') {
-                    alert('바이오인증은 변경할 수 없습니다.');
-                    return;
-                }
-                nbridge.authentication.changeProperty(type, userId, userName).then(function(result) {
-                    console.log('result : ' + result);
-                }, function(error) {
-                    console.log('error : ' + error);
-                });
-            }
-            function authSAUser() {
-                var type = $("select[name='authType'").val();
-                var userId = $("input[name='authUserId'").val();
-                var userName = $("input[name='authUserName'").val();
-                nbridge.authentication.authUser(type, userId, userName).then(function(result) {
-                    console.log('result : ' + result);
-                }, function(error) {
-                    console.log('error : ' + error);
-                });
-            }
-            function unregisterSAUser() {
-                var type = $("select[name='authType'").val();
-                var userId = $("input[name='authUserId'").val();
-                var userName = $("input[name='authUserName'").val();
-                alert("간편인증 해지 type: " + type + ", userName: " + userName);
-                nbridge.authentication.unregisterUser(type, userId, userName).then(function(result) {
-                    console.log('result : ' + result);
-                }, function(error) {
-                    console.log('error : ' + error);
-                });
-            }
-			/*LINK*/
-			function call() {
-				nbridge.link.call('01012345678');
-			}
-			function sms() {
-				nbridge.link.sms('01012345678');
-			}
-            
-            //"https://webchat.thecloudgate.io/webChat?brandKey=ekiK_IPQ0DrFAZervzT8vQ&channelType=scenario&scenarioId=MTA2NQ==&loginId=RC166435343087016867",
-            //"https://www.ntoworks.com/app/hlifs/nbridgeSample.html"
-			function showPopupBrowser() {
-                nbridge.link.showPopupBrowser('https://www.ntoworks.com/app/hlifs/bottest/nbridgeSample.html',
-                                              "팝업브라우져", true, true).then(function(result) {
-                    console.log('popup result:', result);
-                });
-			}
-			function externalBrowser() {
-                nbridge.link.showExternalBrowser('https://www.google.com');
-			}
-            function hidePopupBrowser() {
-                nbridge.link.dismissPopupBrowser({result: "OK"})
-            }
-			function checkApps() {
-                var appIds = ['hanwha.mgr.app.mail', 'hanwha.mgr.app.appstore'];
-				nbridge.link.checkApps(appIds).then(function(result) {
-                    alert(JSON.stringify(result));
-				});
-			}
-			function openApp() {
-				var appId = 'hanwha.mgr.app.mail';
-				nbridge.link.openApp(appId);
-			}
-			function goSetting(type) {
-				// var type = 'push';
-				nbridge.link.goSetting(type);
-			}
-            function share() {
-                nbridge.link.share('https://m.hanwha.co.kr/images/download/Hanwha_Life_Sustainability_Report.pdf');
-            }
-			/*LOCATION*/
-			function available() {
-				nbridge.location.available().then(function(result) {
-					// 위치 권한 
-					alert('result : ' + result);
-					console.log('result : ' + result);
-				}, function(error) {
-					alert('error : ' + error);
-				});
-			}
-			function current() {
-				nbridge.location.current().then(function(result) {
-					alert('longitude : ' + result.longitude + '\nlatitude : ' + result.latitude);
-				}, function(error) {
-					alert('error : ' + error);
-				});
-			}
-			/*PREFERENCE*/
-			function get() {
-				nbridge.preference.get('key', 'defaultValue').then(function(value) {
-					alert('value : ' + value);
-				});
-			}
-			function set() {
-				nbridge.preference.set('key', '{"rgstDvsn":"cust","custId":"2208000012","atrcFpUniqNo":"2211029","userId":"2208000012"}');
-			}
-			function remove() {
-				nbridge.preference.remove('key');
-			}
-			/*UI*/
+
 			function toast() {
 				nbridge.ui.toast('this is toast');
 			}
@@ -193,58 +52,6 @@
 				nbridge.ui.hideLoading();
 			}
 
-			function showKeyboard(type) {
-				$('#plainText').val('');
-				$('#encryptText').val('');
-                var count = type === 'qwerty' ? 12 : 7;
-                nbridge.ui.transKey('show', type, count, function(result) {
-					$('#plainText').val(result.plainText);
-					$('#encryptText').val(result.encryptText);
-				}).then(function(result) {
-					$('#plainText').val(result.plainText);
-					$('#encryptText').val(result.encryptText);
-				});
-			}
-			function dismissKeyboard() {
-				nbridge.ui.transKey('dismiss');
-			}
-			function imageScan() {
-				nbridge.camera.scan().then(function(path) {
-					console.log('path : ' + path);
-				});
-			}
-			function pdfViewer() {
-<!--				nbridge.ui.pdfView('https://m.hanwha.co.kr/images/download/Hanwha_Life_Sustainability_Report.pdf', true).then(function(res) {-->
-                nbridge.ui.pdfView('https://orange-stg.hanwhalifefs.com/rc/m/v1/co/atcm-file/download-link?atcmFileId=6148100def3f4186abc748dcfcd6b36e', true, 'SESSION=YjI0ZjcyMmQtMGI4MS00ZWU5LTk4MDYtYTk5MDIxYmQxYzg0').then(function(res) {
-                    alert(res.result);
-                }, function(err) {
-                    alert('error');
-                });
-			}
-            
-            function openFilePicker(src) {
-                nbridge.ui.filePicker(src).then(function(res) {
-                    console.log("FileName : " + res.fileName + ", FilePath : " + res.filePath);
-                }, function(err) {
-                    console.log("err");
-                });
-            }
-            
-            function openSignPad() {
-                document.getElementById('sign_preview').setAttribute('style', 'display: none;');
-                nbridge.ui.signPad().then(function(res) {
-                    console.log("FilePath : " + res.filePath, "FileName : " + res.fileName);
-                    var image = "data:image/png;base64, " + res.data;
-                    document.getElementById('sign_preview').setAttribute('src', image);
-                    document.getElementById('sign_preview').setAttribute('style', 'display: block;');
-                    
-                    nbridge.link.share(res.filePath);
-                    
-                }, function(err) {
-                    console.log("err");
-                });
-            }
-            
             function uploadFile() {
                 // test site : http://www.csm-testcenter.org/test?do=show&subdo=common&test=file_upload
                 nbridge.ui.filePicker('gallery').then(function(file) {
@@ -267,32 +74,6 @@
                 });
             }
             
-            function getAppIronToken() {
-                nbridge.app.getAppIronToken().then(function(result) {
-                    alert('sessionId : '+result.sessionId, 'token : '+result.token)
-                }, function(err) {
-                    alert(err);
-                })
-            }
-            
-            function setPullToRefresh(allow) {
-                nbridge.ui.setPullToRefresh(allow).then(function(result) {
-                    alert(allow)
-                }, function(err) {
-                    alert(err);
-                })
-            }
-            
-            function onLoad() {
-                nbridge.app.setStatusBarColor('666666');
-                nbridge.event.addPushEventListener(function(obj) {
-                    alert(JSON.stringify(obj));
-                });
-                nbridge.event.addDynamicLinkEventListener(function(obj) {
-                    alert(JSON.stringify(obj));
-                });
-                nbridge.onBridgeReady();
-            }
 		</script>
 	</head>
 	<body style="background-color: darkgray;" onload="onLoad()">
@@ -304,58 +85,7 @@
 		<p align="center">
 			<button style="width:80%; height:40%;" onclick="appInfo()">APP INFO</button><br></br>
 			<button style="width:80%; height:40%;" onclick="deviceInfo()">DEVICE INFO</button><br></br>
-            <button style="width:80%; height:40%;" onclick="pushSettings()">PUSH SETTINGS</button><br></br>
-            <button style="width:80%; height:40%;" onclick="pushAllow()">ALLOW PUSH</button><br></br>
-            <button style="width:80%; height:40%;" onclick="pushDisallow()">DISALLOW PUSH</button><br></br>
-            <button style="width:80%; height:40%;" onclick="getAppIronToken()">APP IRON TOKEN & SESSION ID</button><br></br>
 			<button style="width:80%; height:40%;" onclick="exit()">EXIT</button><br></br>
-            <button style="width:80%; height:40%;" onclick="update()">UPDATE</button><br></br>
-            <button stype="width:80%; height:40%;" onclick="setStatusBarColor('FF0000')">SET STATUSBAR COLOR TO RED</button><br>
-            <button stype="width:80%; height:40%;" onclick="setStatusBarColor('0000FF')">SET STATUSBAR COLOR TO BLUE</button><br></br>
-            log : <input name="logInput" src="text"/><br>
-            <button style="width:80%; height:40%;" onclick="log('debug')">debug LOG(iOS only)</button><br>
-            <button style="width:80%; height:40%;" onclick="log('error')">error LOG(iOS only)</button><br></br>
-
-		</p>
-		<h2 align="center" >AUTHENTICATION</h2>
-		<p align="center" >
-			<div align="center" >
-				type : 
-				<select name="authType">
-					<option value="pin" selected>PIN Code</option>
-					<option value="pattern">Pattern Lock</option>
-					<option value="bio">Bio(Fingerprint/Face)</option>
-				</select>
-			</form>
-			<br>
-            userName : <input name="authUserName" src="text"/><br>
-            userId : <input name="authUserId" src="text"/>
-			</div>
-		</div>
-		</p>
-        <p align="center">
-            <button style="width:80%; height:40%;" onclick="registerSAUser()">REGISTER USER</button><br></br>
-            <!-- <button style="width:80%; height:40%;" onclick="changeProperty()">CHANGE PROPERTY</button><br></br>
-            <button style="width:80%; height:40%;" onclick="authSAUser()">AUTHENTIFICATE USER</button><br></br>
-            <button style="width:80%; height:40%;" onclick="unregisterSAUser()">UNREGISTER USER</button><br></br> -->
-        </p>
-		<h2 align="center">LINK</h2>
-		<p align="center">
-			<button style="width:80%; height:40%;" onclick="call()">CALL (01012345678)</button><br></br>
-			<button style="width:80%; height:40%;" onclick="sms()">SMS (01012345678)</button><br></br>
-            <button style="width:80%; height:40%;" onclick="showPopupBrowser()">SHOW POPUP BROWSER</button><br></br>
-            <button style="width:80%; height:40%;" onclick="externalBrowser()">EXTERNAL BROWSER</button><br></br>
-            <button style="width:80%; height:40%;" onclick="hidePopupBrowser()">HIDE POPUP BROWSER</button><br></br>
-			<button style="width:80%; height:40%;" onclick="checkApps()">CHECK APPS</button><br></br>
-			<button style="width:80%; height:40%;" onclick="openApp()">OPEN APP</button><br></br>
-			<button style="width:80%; height:40%;" onclick="goSetting('push')">GO SETTING(PUSH)</button><br></br>
-			<button style="width:80%; height:40%;" onclick="goSetting('setting')">GO SETTING(SETTING)</button><br></br>
-            <button style="width:80%; height:40%;" onclick="share()">SHARE</button><br></br>
-		</p>
-		<h2 align="center">LOCATION</h2>
-		<p align="center">
-			<button style="width:80%; height:40%;" onclick="available()">AVAILABLE</button><br></br>
-			<button style="width:80%; height:40%;" onclick="current()">LOCATION</button><br></br>
 		</p>
 		<h2 align="center">PREFERENCE</h2>
 		<p align="center">
@@ -368,47 +98,12 @@
 			<button style="width:80%; height:40%;" onclick="toast()">TOAST</button><br></br>
 			<button style="width:80%; height:40%;" onclick="showLoading()">SHOW LOADING</button><br></br>
 			<button style="width:80%; height:40%;" onclick="dismissLoading()">DISMISS LOADING</button><br></br><br></br>
+			<button style="width:80%; height:40%;" onclick="goSetting('push')">GO SETTING(PUSH)</button><br></br>
+			<button style="width:80%; height:40%;" onclick="goSetting('setting')">GO SETTING(SETTING)</button><br></br>
 
-            <button style="width:80%; height:40%;" onclick="setPullToRefresh(true)">PULL TO REFRESH ON</button><br></br>
-            <button style="width:80%; height:40%;" onclick="setPullToRefresh(false)">PULL TO REFRESH OFF</button><br></br>
-            
-			<input style="width:60%; height:30px;" id="plainText" type="text" placeholder="평문 데이터" value="" readonly /><br></br>
-			<input style="width:60%; height:30px;" id="encryptText" type="text" placeholder="암호화 데이터" value="" readonly /><br></br>
-
-            <button style="width:80%; height:40%;" onclick="showKeyboard('qwerty')">SHOW QWERTY KEYBOARD</button><br></br>
-            <button style="width:80%; height:40%;" onclick="showKeyboard('number')">SHOW NUM KEYBOARD</button><br></br>
-			<button style="width:80%; height:40%;" onclick="dismissKeyboard()">DISMISS KEYBOARD</button><br></br>
-			<button style="width:80%; height:40%;" onclick="pdfViewer()">PDF VIEWER</button><br></br>
-            
-            <button style="width:80%; height:40%;" onclick="openFilePicker('camera')">CAMERA FILEPICKER </button><br></br>
-            <button style="width:80%; height:40%;" onclick="openFilePicker('gallery')">GALLERY FILEPICKER </button><br></br>
-            <button style="width:80%; height:40%;" onclick="openFilePicker('file')">FILE FILEPICKER </button><br></br>
             <button style="width:80%; height:40%;" onclick="uploadFile()">PICK A FILE AND UPLOAD FILE</button><br></br>
-            <button style="width:80%; height:40%;" onclick="openSignPad()">SHOW SIGN PAD</button><br></br>
             <p><img id="sign_preview" style="display: none;" height="200" width="400"></p>
 		</p>
-        
-        <h2 align="center">HTML File Upload</h2>
-        <p align="center">
-<!--            <input type="file" name="file" value="File" id="camera">-->
-            <input type="file" accept="image/*" id="camera">
-            <h3>Preview:</h3>
-            <p><img id="preview" height="400" width="400"></p>
-                
-                <script>
-                    var camera = document.getElementById('camera');
-                    var preview = document.getElementById('preview');
-                                 
-                    camera.addEventListener('change', function(e) {
-                        var file = e.target.files[0];
-                        preview.src = URL.createObjectURL(file);
-                    });
-                </script>
-        </p>
-        
-        <!-- TWC chatbot Scripts -->
-
-        <a href="https://webchat.thecloudgate.io/webChat?brandKey=ekiK_IPQ0DrFAZervzT8vQ&channelType=scenario&hasTitle=false" target="_blank">챗봇 버튼</a>
          
 	</body>
 </html>
