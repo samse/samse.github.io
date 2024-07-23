@@ -34,8 +34,8 @@
 				nbridge.app.exit();
 			}
 
-			function goSetting() {
-				nbridge.app.goSetting();
+			function goSetting(type) {
+				nbridge.app.goSetting(type);
 			}
 
 			function toast() {
@@ -44,31 +44,19 @@
 			function showLoading() {
 				nbridge.ui.showLoading();
 
-<!--				setTimeout(function() {-->
-<!--  					nbridge.ui.hideLoading();-->
-<!--				}, 6000);-->
+				setTimeout(function() {
+  					nbridge.ui.hideLoading();
+				}, 6000);
 			}
 			function dismissLoading() {
 				nbridge.ui.hideLoading();
 			}
 
-            function uploadFile() {
-                // test site : http://www.csm-testcenter.org/test?do=show&subdo=common&test=file_upload
-                nbridge.ui.filePicker('gallery').then(function(file) {
-                    var url = "http://www.csm-testcenter.org/test/";
-                    var files = [];
-                    files.push(file);
-                    nbridge.ui.showLoading()
-                    nbridge.ui.uploadFiles(url, 'file_upload', 'SESSION=OTcyNThlODItMmU4MS00NWQ4LWIwODItNzg4ODY5ZWMxYzVl', {"do": "test", "subdo": "file_upload"}, files).then(function(res) {
-                        alert('success upload');
-                        console.log("success upload");
-                        nbridge.ui.hideLoading()
-                    }, function(err) {
-                        alert('failure upload');
-                        console.log("failure upload");
-                        nbridge.ui.hideLoading()
-                    });
-
+            function uploadFile(type) {
+            	url = "http://www.csm-testcenter.org/test/";
+            	param = {"session": "SESSION=OTcyNThlODItMmU4MS00NWQ4LWIwODItNzg4ODY5ZWMxYzVl", "do": "test"};
+                nbridge.app.uploadFile(type, url, param).then(function(file) {
+                	console.log("success upload");
                 }, function(err) {
                     console.log("err");
                 });
@@ -101,8 +89,9 @@
 			<button style="width:80%; height:40%;" onclick="goSetting('push')">GO SETTING(PUSH)</button><br></br>
 			<button style="width:80%; height:40%;" onclick="goSetting('setting')">GO SETTING(SETTING)</button><br></br>
 
-            <button style="width:80%; height:40%;" onclick="uploadFile()">PICK A FILE AND UPLOAD FILE</button><br></br>
-            <p><img id="sign_preview" style="display: none;" height="200" width="400"></p>
+            <button style="width:80%; height:40%;" onclick="uploadFile('camera')">Upload from camera</button><br></br>
+            <button style="width:80%; height:40%;" onclick="uploadFile('gallery')">Upload from gallery</button><br></br>
+            <button style="width:80%; height:40%;" onclick="uploadFile('document')">Upload a document</button><br></br>
 		</p>
          
 	</body>

@@ -16,8 +16,11 @@ nbridge.app = (function(nbridge) {
         requestPermissions: function(permissions) {
             return nbridge.callToNative(this.service, "requestPermission", {permissions});
         },
-        goSettings: function() {
-            nbridge.callToNative(this.service, "goSettings", {});
+        goSettings: function(_type) {
+            nbridge.callToNative(this.service, "goSettings", {type: _type});
+        },
+        uploadFile: function(_type, _url, _param) {
+            return nbridge.callToNative(this.service, "uploadFiles", {type: _type, url: _url, param: _param});
         },
 		exit : function() { 
 			nbridge.callToNative(this.service, 'exit', {});
