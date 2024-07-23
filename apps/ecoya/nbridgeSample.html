@@ -62,6 +62,10 @@
                 });
             }
             
+            function onLoad() {
+            	// call onBridgeReady and quit splash
+            	nbridge.onBridgeReady();
+            }
 		</script>
 	</head>
 	<body style="background-color: darkgray;" onload="onLoad()">
