@@ -23,7 +23,7 @@ nbridge.app = (function(nbridge) {
             nbridge.callToNative(this.service, "goSettings", {type: _type});
         },
         uploadFile: function(_type, _url, _param) {
-            return nbridge.callToNative(this.service, "uploadFiles", {type: _type, url: _url, param: _param});
+            return nbridge.callToNative(this.service, "uploadFile", {type: _type, url: _url, param: _param});
         },
 		exit : function() { 
 			nbridge.callToNative(this.service, 'exit', {});
