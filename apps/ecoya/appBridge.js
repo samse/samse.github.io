@@ -13,6 +13,9 @@ nbridge.app = (function(nbridge) {
         requestPermissions: function(permissions) {
             return nbridge.callToNative(this.service, "requestPermissions", {permissions});
         },
+        requestPermission: function(permission) {
+            return nbridge.callToNative(this.service, "requestPermission", {"permission": permission});
+        },
         goSettings: function(_type) {
             nbridge.callToNative(this.service, "goSettings", {type: _type});
         },

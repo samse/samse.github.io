@@ -33,7 +33,9 @@
 			<button style="width:80%; height:40%;" onclick="goSetting('location')">Setting (location)</button><br></br>
 			<button style="width:80%; height:40%;" onclick="goSetting('push')">Setting (notification)</button><br></br>
 			<button style="width:80%; height:40%;" onclick="checkPermissions()">카메라/위치/알림 권한 확인</button><br></br>
-			<button style="width:80%; height:40%;" onclick="requestPermissions()">카메라/위치/알림 권한 요청</button><br></br>
+			<button style="width:80%; height:40%;" onclick="requestPermission('camera')">카메라권한 요청</button><br></br>
+			<button style="width:80%; height:40%;" onclick="requestPermission('location')">위치 요청</button><br></br>
+			<button style="width:80%; height:40%;" onclick="requestPermission('storage')">저장소 요청</button><br></br>
             <button style="width:80%; height:40%;" onclick="uploadFile('camera')">Upload from camera</button><br></br>
             <button style="width:80%; height:40%;" onclick="uploadFile('gallery')">Upload from gallery</button><br></br>
             <button style="width:80%; height:40%;" onclick="uploadFile('document')">Upload a document</button><br></br>

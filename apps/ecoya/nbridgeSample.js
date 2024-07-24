@@ -43,6 +43,13 @@ function requestPermissions() {
     });
 }
 
+function requestPermission(permission) {
+        nbridge.app.requestPermission(permission).then(function(result) {
+        alert(JSON.stringify(result));
+    });
+
+}
+
 function toast() {
     nbridge.ui.toast('this is toast');
 }
