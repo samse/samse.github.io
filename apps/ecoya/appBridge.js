@@ -10,6 +10,9 @@ nbridge.app = (function(nbridge) {
         checkPermissions: function(permissions) {
             return nbridge.callToNative(this.service, "checkPermissions", {permissions});
         },
+        checkPermission: function(permissions) {
+            return nbridge.callToNative(this.service, "checkPermission", {"permission": permission});
+        },
         requestPermissions: function(permissions) {
             return nbridge.callToNative(this.service, "requestPermissions", {permissions});
         },
