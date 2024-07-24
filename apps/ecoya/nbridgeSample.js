@@ -32,7 +32,7 @@ function goSetting(type) {
 }
 
 function checkPermission(permission) {
-    nbridge.app.checkPermission([permission]).then(function(result) {
+    nbridge.app.checkPermission(permission).then(function(result) {
         alert(JSON.stringify(result));
     });
 }
