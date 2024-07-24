@@ -23,8 +23,24 @@ function exit() {
     nbridge.app.exit();
 }
 
+function checkGps() {
+    nbridge.app.checkGps();
+}
+
 function goSetting(type) {
-    nbridge.app.goSetting(type);
+    nbridge.app.goSettings(type);
+}
+
+function checkPermissions() {
+    nbridge.app.checkPermissions(["camera", "location", "push"]).then(function(result) {
+        alert(JSON.stringify(result));
+    });
+}
+
+function requestPermissions() {
+    nbridge.app.requestPermissions(["camera", "location", "push"]).then(function(result) {
+        alert(JSON.stringify(result));
+    });
 }
 
 function toast() {
