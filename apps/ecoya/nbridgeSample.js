@@ -29,6 +29,8 @@ function checkGps() {
         if (result.isGpsEnabled === false) {
             alert("위치서비스가 비활성화 상태입니다. 설정에서 위치서비스를 활성화 해주세요.");
             nbridge.app.goSettings("location");
+        } else {
+            alert("위치서비스가 활성화 상태입니다.")
         }
     });
 }
