@@ -31,6 +31,12 @@ function goSetting(type) {
     nbridge.app.goSettings(type);
 }
 
+function checkPermission(permission) {
+    nbridge.app.checkPermissions([permission]).then(function(result) {
+        alert(JSON.stringify(result));
+    });
+}
+
 function checkPermissions() {
     nbridge.app.checkPermissions(["camera", "location", "storage"]).then(function(result) {
         alert(JSON.stringify(result));

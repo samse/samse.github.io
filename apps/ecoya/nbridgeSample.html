@@ -11,10 +11,15 @@
 		<script src="nbridgeSample.js"></script>
 		<script type="text/javascript">
 			
-            
+            var permissionType = 'camera';
+
+            function onPermissionSelected() {
+				var value = $("#permissionselect option:selected").val();
+				permissionType = value;
+            }
+
             function onLoad() {
             	// call onBridgeReady and quit splash
-            	debugger;
             	nbridge.onBridgeReady();
             }
 		</script>
@@ -32,10 +37,15 @@
 			<button style="width:80%; height:40%;" onclick="goSetting('normal')">Setting (normal)</button><br></br>
 			<button style="width:80%; height:40%;" onclick="goSetting('location')">Setting (location)</button><br></br>
 			<button style="width:80%; height:40%;" onclick="goSetting('push')">Setting (notification)</button><br></br>
-			<button style="width:80%; height:40%;" onclick="checkPermissions()">카메라/위치/알림 권한 확인</button><br></br>
-			<button style="width:80%; height:40%;" onclick="requestPermission('camera')">카메라권한 요청</button><br></br>
-			<button style="width:80%; height:40%;" onclick="requestPermission('location')">위치 요청</button><br></br>
-			<button style="width:80%; height:40%;" onclick="requestPermission('storage')">저장소 요청</button><br></br>
+			<select id="permissionselect" name="permissionselect" onchange="onPermissionSelected()">
+				<option value="camera">카메라</option>
+				<option value="location">위치</option>
+				<option value="storage">저장소</option>
+			</select><br/>
+
+			<button style="width:80%; height:40%;" onclick="checkPermission(permissionType)">권한 확인</button><br></br>
+			<button style="width:80%; height:40%;" onclick="requestPermission(permissionType)">권한 요청</button><br></br>
+
             <button style="width:80%; height:40%;" onclick="uploadFile('camera')">Upload from camera</button><br></br>
             <button style="width:80%; height:40%;" onclick="uploadFile('gallery')">Upload from gallery</button><br></br>
             <button style="width:80%; height:40%;" onclick="uploadFile('document')">Upload a document</button><br></br>
@@ -53,6 +63,8 @@
 			<button style="width:80%; height:40%;" onclick="dismissLoading()">DISMISS LOADING</button><br></br><br></br>
 
 		</p>
-         
+         <script type="text/javascript">
+         	$
+         </script>
 	</body>
 </html>
