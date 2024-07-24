@@ -32,13 +32,13 @@ function goSetting(type) {
 }
 
 function checkPermissions() {
-    nbridge.app.checkPermissions(["camera", "location", "push"]).then(function(result) {
+    nbridge.app.checkPermissions(["camera", "location", "storage"]).then(function(result) {
         alert(JSON.stringify(result));
     });
 }
 
 function requestPermissions() {
-    nbridge.app.requestPermissions(["camera", "location", "push"]).then(function(result) {
+    nbridge.app.requestPermissions(["camera", "location", "storage"]).then(function(result) {
         alert(JSON.stringify(result));
     });
 }
