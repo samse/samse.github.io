@@ -24,7 +24,9 @@ function exit() {
 }
 
 function checkGps() {
-    nbridge.app.checkGps();
+    nbridge.app.checkGps().then(function(result) {
+        alert(JSON.stringify(result));
+    });
 }
 
 function goSetting(type) {
