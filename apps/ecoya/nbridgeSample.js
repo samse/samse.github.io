@@ -90,8 +90,8 @@ function uploadFile(type) {
 
 function showLoading() {
     nbridge.app.showLoading("Loading");
+    setTimeout(()=> {
+        nbridge.app.hideLoading();
+    }, 2000);
 }
 
-function hideLoading() {
-    nbridge.app.hideLoading();
-}
