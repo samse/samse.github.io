@@ -87,3 +87,11 @@ function uploadFile(type) {
         console.log("err");
     });
 }
+
+function showLoading() {
+    nbridge.app.showLoading("Loading");
+}
+
+function hideLoading() {
+    nbridge.app.hideLoading();
+}
