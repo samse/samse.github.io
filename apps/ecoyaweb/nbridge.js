@@ -75,6 +75,12 @@ var nbridge = (function () {
             outObject[key] = (typeof value === "object" && value !== null) ? deepCopyObject(value) : value;
           }
           return outObject;
+        },
+        navigationBar: {
+            onBackButtonClick: function() {},
+            onInfoButtonClick: function() {},
+            onSelected: function(index) {},
+            onNotiButtonClick: function() {}
         }
     }
 })();
