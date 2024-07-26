@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.5a747cff.css",
-    "main.js": "/static/js/main.267cbbda.js",
-    "static/js/453.bc0c45ad.chunk.js": "/static/js/453.bc0c45ad.chunk.js",
-    "index.html": "/index.html",
-    "main.5a747cff.css.map": "/static/css/main.5a747cff.css.map",
-    "main.267cbbda.js.map": "/static/js/main.267cbbda.js.map",
-    "453.bc0c45ad.chunk.js.map": "/static/js/453.bc0c45ad.chunk.js.map"
+    "main.css": "/apps/ecoyaweb/static/css/main.5a747cff.css",
+    "main.js": "/apps/ecoyaweb/static/js/main.468d5c16.js",
+    "static/js/453.bc0c45ad.chunk.js": "/apps/ecoyaweb/static/js/453.bc0c45ad.chunk.js",
+    "index.html": "/apps/ecoyaweb/index.html",
+    "main.5a747cff.css.map": "/apps/ecoyaweb/static/css/main.5a747cff.css.map",
+    "main.468d5c16.js.map": "/apps/ecoyaweb/static/js/main.468d5c16.js.map",
+    "453.bc0c45ad.chunk.js.map": "/apps/ecoyaweb/static/js/453.bc0c45ad.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5a747cff.css",
-    "static/js/main.267cbbda.js"
+    "static/js/main.468d5c16.js"
   ]
 }
