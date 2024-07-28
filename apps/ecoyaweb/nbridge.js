@@ -79,8 +79,10 @@ var nbridge = (function () {
         navigationBar: {
             onBackButtonClick: function() {},
             onInfoButtonClick: function() {},
-            onSelected: function(index) {},
             onNotiButtonClick: function() {}
+        },
+        gnbBar: {
+            onMenuSelected: function(index) {}
         }
     }
 })();
