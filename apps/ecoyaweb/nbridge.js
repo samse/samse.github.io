@@ -79,6 +79,7 @@ var nbridge = (function () {
         navigationBar: {
             onBackButtonClick: function() {},
             onInfoButtonClick: function() {},
+            onCarButtonClick: function() {},
             onNotiButtonClick: function() {}
         },
         gnbBar: {
