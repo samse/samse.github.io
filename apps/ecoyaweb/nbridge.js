@@ -5,7 +5,7 @@ var nbridge = (function () {
             android = true; try { nBridge } catch(e) { android = false; }
             console.log('android : ' + android);
             if (android) return 'android';
-            ios = true; try { window.webkit.messageHandlers.nBridge } catch(e) { ios = false; }
+            ios = true; try { window.webkit.messageHandlers.WKBridge } catch(e) { ios = false; }
             console.log('ios : ' + ios);
             if (ios) return 'ios';
             return 'web';
@@ -16,7 +16,7 @@ var nbridge = (function () {
                 nBridge.onBridgeReady();
             } else if (nbridge.platform() == 'ios') {
                 var res = {command: 'onBridgeReady'};
-                window.webkit.messageHandlers.nBridge.postMessage(JSON.stringify(res));
+                window.webkit.messageHandlers.WKBridge.postMessage(JSON.stringify(res));
             }
         },
         callToNative: function(service, action, option) {
@@ -29,7 +29,7 @@ var nbridge = (function () {
                     if (nbridge.platform() == 'android') {
                         nBridge.callFromWeb(JSON.stringify(command));
                     } else if (nbridge.platform() == 'ios') {
-                        window.webkit.messageHandlers.nBridge.postMessage(JSON.stringify(command));
+                        window.webkit.messageHandlers.WKBridge.postMessage(JSON.stringify(command));
                     }
                 } catch (exception) {
                     console.error(exception);
