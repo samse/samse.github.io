@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/apps/ecoyaweb/static/css/main.32dc3ebb.css",
-    "main.js": "/apps/ecoyaweb/static/js/main.32544666.js",
+    "main.js": "/apps/ecoyaweb/static/js/main.17a00889.js",
     "static/js/453.bc0c45ad.chunk.js": "/apps/ecoyaweb/static/js/453.bc0c45ad.chunk.js",
     "index.html": "/apps/ecoyaweb/index.html",
     "main.32dc3ebb.css.map": "/apps/ecoyaweb/static/css/main.32dc3ebb.css.map",
-    "main.32544666.js.map": "/apps/ecoyaweb/static/js/main.32544666.js.map",
+    "main.17a00889.js.map": "/apps/ecoyaweb/static/js/main.17a00889.js.map",
     "453.bc0c45ad.chunk.js.map": "/apps/ecoyaweb/static/js/453.bc0c45ad.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.32dc3ebb.css",
-    "static/js/main.32544666.js"
+    "static/js/main.17a00889.js"
   ]
 }
