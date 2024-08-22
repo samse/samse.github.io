@@ -1,0 +1,138 @@
+<!-- 배포 로그 -->
+<!-- • [08/19] 최초 배포 -->
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+  <title>Ecoya 앱배포 페이지</title>
+  <style type="text/css">
+    body {
+      background: repeat #38383d;
+      font-family: Helvetica, arial, sans-serif;
+    }
+    .congrats {
+      font-size: 20pt;
+      padding: 6px;
+      text-align: center;
+      color: white;
+    }
+    .desc1 {
+      font-size: 15pt;
+      padding: 6px;
+      text-align: left;
+      color: white;
+    }
+    .desc {
+      font-size: 10pt;
+      padding: 6px;
+      text-align: left;
+      color: white;
+    }
+    .log {
+      font-size: 9pt;
+      text-align: left;
+      color: white;
+    }
+    .step {
+      font-size: 12pt;
+      background: white;
+      border: 1px #ccc solid;
+      border-radius: 14px;
+      padding: 4px 10px;
+      margin: 10px 0;
+    }
+    .instructions {
+      font-size: 12pt;
+    }
+    .icon_image {
+      border: 1px #ccc solid;
+      border-radius: 10px;
+      margin: 0 10px;
+    }
+    .button-shortcut {
+      font-size: 10pt;
+    	border: 1px #000 solid;
+      border-radius: 5px;
+    	height: 30px;
+    	width: 60px;
+    	background-color: white;
+    } 
+    table {
+      width: 100%;
+    }
+    /*@media (prefers-color-scheme: light) {
+      body {
+        background: repeat #828282;
+      }
+      .congrats {
+        color: black;
+      }
+      .desc1 {
+        color: black;
+      }
+      .desc {
+        color: black;
+      }
+      .log {
+        color: black;
+      }
+      .step {
+        background: white;
+        border: 1px #ccc solid;
+      }
+      .icon_image {
+        border: 1px #ccc solid;
+      }
+      .button-shortcut {
+        border: 1px #000 solid;
+        border-radius: 5px;
+        background-color: white;
+      }*/
+    }
+  </style>
+  <script type="text/javascript">
+  	function goInstall(link){
+		location.href = link;
+	}
+  </script>
+</head>
+<body>
+
+
+<div class="congrats">에코야 모바일앱 배포 페이지</div>
+
+
+<!-- <div class="congrats">운영 테스트</div> -->
+
+<div class="step">
+  <table><tr>
+      <td width="57">
+        <img class="icon_image" src="./app_icon.png" height="57" width="57" />
+      </td>
+      <td class="instructions"><b>[iOS] Ecoya<b><br/><font size="2px" color="#666666">v0.1.0 | 2024.08.22</font></td>
+    <td width="70">
+      <button class="button-shortcut" onclick="goInstall('itms-services://?action=download-manifest&url=https://www.ntoworks.com/app/resources/ec_0.1.0.plist');">설치</button>
+      </td> 
+    </tr>
+  </table>
+</div>
+
+
+<div class="step">
+  <table><tr>
+    <td width="57">
+      <img class="icon_image" src="./app_icon.png" height="57" width="57" />
+    </td>
+    <td class="instructions"><b>[Android] Ecoya<b><br/><font size="2px" color="#666666">v0.1.0 | 2024.08.22</font></td>
+  <td width="70">
+    <button class="button-shortcut" onclick="goInstall('https://www.ntoworks.com/app/resources/ec-app-releasse_0.1.0.apk');">설치</button>
+    </td> 
+  </tr>
+  </table>
+</div>
+
+
+
+</body>
+</html>
