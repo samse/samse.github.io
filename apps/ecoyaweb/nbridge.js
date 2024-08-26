@@ -2,10 +2,10 @@ var nbridge = (function () {
     return {
         callback: function() {},
         platform: function () {
-            android = true; try { nBridge } catch(e) { android = false; }
+            var android = true; try { nBridge } catch(e) { android = false; }
             console.log('android : ' + android);
             if (android) return 'android';
-            ios = true; try { window.webkit.messageHandlers.WKBridge } catch(e) { ios = false; }
+            var ios = true; try { window.webkit.messageHandlers.WKBridge } catch(e) { ios = false; }
             console.log('ios : ' + ios);
             if (ios) return 'ios';
             return 'web';
