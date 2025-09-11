@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>골프 팀 핸디캡 계산기</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .game-settings {
+            background: #e8f4fd;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 2px solid #3498db;
+        }
+        
+        .game-settings h2 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        
+        .handicap-setting {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .handicap-setting label {
+            font-weight: 600;
+            color: #34495e;
+        }
+        
+        .handicap-setting input {
+            padding: 8px 12px;
+            border: 2px solid #e1e8ed;
+            border-radius: 5px;
+            width: 100px;
+        }
+        
+        .teams-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .team-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .team-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .player-input {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #e1e8ed;
+        }
+        
+        .player-input h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        
+        .input-row {
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .input-row input {
+            padding: 8px 10px;
+            border: 2px solid #e1e8ed;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .input-row input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+        
+        .input-row label {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 2px;
+            display: block;
+        }
+        
+        .calculate-btn {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(39, 174, 96, 0.3);
+        }
+        
+        .calculate-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .results-section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-top: 30px;
+        }
+        
+        .results-header {
+            background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .results-header h2 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+        
+        .results-table {
+            padding: 20px;
+        }
+        
+        .results-table table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        .results-table th {
+            background: #34495e;
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 12px;
+        }
+        
+        .results-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #e1e8ed;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        .results-table tr:hover td {
+            background: #f8f9fa;
+        }
+        
+        .rank-1 {
+            background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%) !important;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .rank-2 {
+            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%) !important;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .rank-3 {
+            background: linear-gradient(135deg, #e67e22 0%, #d35400 100%) !important;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .rank-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 0.9em;
+            text-align: center;
+            min-width: 25px;
+        }
+        
+        .team-members {
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        
+        .team-member {
+            margin-bottom: 3px;
+        }
+        
+        .member-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .member-scores {
+            color: #7f8c8d;
+        }
+        
+        .team-total {
+            font-weight: bold;
+            color: #27ae60;
+            font-size: 1.1em;
+        }
+        
+        .progress-indicator {
+            background: #ecf0f1;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .progress-bar {
+            background: #bdc3c7;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .teams-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .input-row {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            
+            .handicap-setting {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .results-table {
+                font-size: 12px;
+            }
+            
+            .results-table th,
+            .results-table td {
+                padding: 8px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏌️‍♂️ 북수골 갑장 친선게임 스코어 계산기</h1>
+            <p>8개 조 × 4명 팀별 골프 게임 결과 계산</p>
+        </div>
+        
+        <div class="content">
+            <!-- 게임 설정 -->
+            <div class="game-settings">
+                <h2>⚙️ 게임 설정</h2>
+                <div class="handicap-setting">
+                    <label for="handicapRate">핸디캡 반영 비율 (%):</label>
+                    <input type="number" id="handicapRate" value="100" min="0" max="100" step="10">
+                    <span>핸디캡을 몇 %만큼 적용할지 설정합니다</span>
+                </div>
+            </div>
+            
+            <!-- 진행 상황 표시 -->
+            <div class="progress-indicator">
+                <h3>입력 진행 상황</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+                <p id="progressText">0/32명 입력 완료</p>
+            </div>
+            
+            <!-- 팀 입력 -->
+            <div class="teams-container" id="teamsContainer">
+                <!-- 팀들이 여기에 동적으로 생성됩니다 -->
+            </div>
+            
+            <!-- 계산 버튼 -->
+            <button class="calculate-btn" id="calculateBtn" onclick="calculateTeamResults()" disabled>
+                🏆 팀 순위 계산하기
+            </button>
+            
+            <!-- 결과 테이블 -->
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-header">
+                    <h2>🏆 팀별 최종 순위</h2>
+                    <p>핸디캡이 반영된 최종 결과입니다</p>
+                </div>
+                <div class="results-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>순위</th>
+                                <th>팀</th>
+                                <th>팀원 정보</th>
+                                <th>실제 총합</th>
+                                <th>적용 핸디캡</th>
+                                <th>최종 스코어</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let teams = [];
+        
+        // 8개 팀 초기화
+        function initializeTeams() {
+            const _teams = loadPlayers();
+            for (let i = 0; i < 8; i++) {
+                teams.push({
+                    id: i,
+                    name: _teams[i].name,
+                    players: [
+                        { name: _teams[i].players[0].name, handicap: _teams[i].players[0].handicap, score: _teams[i].players[0].score },
+                        { name: _teams[i].players[1].name, handicap: _teams[i].players[1].handicap, score: _teams[i].players[1].score },
+                        { name: _teams[i].players[2].name, handicap: _teams[i].players[2].handicap, score: _teams[i].players[2].score },
+                        { name: _teams[i].players[3].name, handicap: _teams[i].players[3].handicap, score: _teams[i].players[3].score }
+                    ]
+                });
+            }
+            renderTeams();
+        }
+        
+        // 팀 UI 렌더링
+        function renderTeams() {
+            const container = document.getElementById('teamsContainer');
+            container.innerHTML = teams.map(team => `
+                <div class="team-card">
+                    <div class="team-header">${team.name}</div>
+                    ${team.players.map((player, playerIndex) => `
+                        <div class="player-input">
+                            <div class="input-row">
+                                <div>
+                                    <label>이름</label>
+                                    <input type="text" 
+                                           placeholder="이름 입력" 
+                                           value="${player.name}"
+                                           onchange="updatePlayer(${team.id}, ${playerIndex}, 'name', this.value)">
+                                </div>
+                                <div>
+                                    <label>핸디캡</label>
+                                    <input type="number" 
+                                           placeholder="핸디캡" 
+                                           step="0.1" 
+                                           value="${player.handicap || ''}"
+                                           onchange="updatePlayer(${team.id}, ${playerIndex}, 'handicap', this.value)">
+                                </div>
+                                <div>
+                                    <label>스코어</label>
+                                    <input type="number" 
+                                           placeholder="최종점수" 
+                                           value="${player.score || ''}"
+                                           onchange="updatePlayer(${team.id}, ${playerIndex}, 'score', this.value)">
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `).join('');
+            
+            updateProgress();
+        }
+        
+        // 플레이어 정보 업데이트
+        function updatePlayer(teamId, playerIndex, field, value) {
+            const team = teams.find(t => t.id === teamId);
+            if (team) {
+                if (field === 'name') {
+                    team.players[playerIndex][field] = value.trim();
+                } else {
+                    team.players[playerIndex][field] = value ? parseFloat(value) : null;
+                }
+                updateProgress();
+            }
+            savePlayers();
+        }
+        
+        // 진행 상황 업데이트
+        function updateProgress() {
+            let completedPlayers = 0;
+            let totalPlayers = 32; // 8팀 × 4명
+            
+            teams.forEach(team => {
+                team.players.forEach(player => {
+                    if (player.name && 
+                        player.handicap !== null && 
+                        player.score !== null) {
+                        completedPlayers++;
+                    }
+                });
+            });
+            
+            const percentage = (completedPlayers / totalPlayers) * 100;
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = `${completedPlayers}/${totalPlayers}명 입력 완료`;
+            
+            // 모든 플레이어 정보가 입력되면 계산 버튼 활성화
+            const calculateBtn = document.getElementById('calculateBtn');
+            if (completedPlayers === totalPlayers) {
+                calculateBtn.disabled = false;
+                calculateBtn.textContent = '🏆 팀 순위 계산하기';
+            } else {
+                calculateBtn.disabled = true;
+                calculateBtn.textContent = `🏆 팀 순위 계산하기 (${completedPlayers}/${totalPlayers})`;
+            }
+        }
+        
+        // 팀 결과 계산
+        function calculateTeamResults() {
+            const handicapRate = parseFloat(document.getElementById('handicapRate').value) / 100;
+            
+            // 각 팀별 계산
+            const teamResults = teams.map(team => {
+                let totalActualScore = 0;
+                let totalAppliedHandicap = 0;
+                let validPlayers = 0;
+                
+                const playerResults = team.players.map(player => {
+                    if (player.name && player.handicap !== null && player.score !== null) {
+                        const appliedHandicap = player.handicap * handicapRate;
+                        const finalScore = player.score - appliedHandicap;
+                        
+                        totalActualScore += player.score;
+                        totalAppliedHandicap += appliedHandicap;
+                        validPlayers++;
+                        
+                        return {
+                            name: player.name,
+                            handicap: player.handicap,
+                            appliedHandicap: appliedHandicap,
+                            actualScore: player.score,
+                            finalScore: finalScore
+                        };
+                    }
+                    return null;
+                }).filter(p => p !== null);
+                
+                const totalFinalScore = totalActualScore - totalAppliedHandicap;
+                
+                return {
+                    teamId: team.id,
+                    teamName: team.name,
+                    players: playerResults,
+                    totalActualScore: totalActualScore,
+                    totalAppliedHandicap: totalAppliedHandicap,
+                    totalFinalScore: totalFinalScore,
+                    validPlayers: validPlayers
+                };
+            }).filter(team => team.validPlayers === 4); // 4명이 모두 입력된 팀만
+            
+            // 최종 스코어 기준으로 정렬 (낮은 점수가 좋음)
+            teamResults.sort((a, b) => a.totalFinalScore - b.totalFinalScore);
+            
+            displayResults(teamResults);
+        }
+        
+        // 결과 표시
+        function displayResults(teamResults) {
+            const resultsBody = document.getElementById('resultsBody');
+            const resultsSection = document.getElementById('resultsSection');
+            
+            let currentRank = 1;
+            let previousScore = null;
+            let sameRankCount = 0;
+            
+            resultsBody.innerHTML = teamResults.map((team, index) => {
+                // 동점 처리
+                if (previousScore !== null && Math.abs(team.totalFinalScore - previousScore) < 0.01) {
+                    sameRankCount++;
+                } else {
+                    currentRank = index + 1;
+                    sameRankCount = 0;
+                }
+                previousScore = team.totalFinalScore;
+                
+                const rankClass = currentRank <= 3 ? `rank-${currentRank}` : '';
+                
+                const playersInfo = team.players.map(player => `
+                    <div class="team-member">
+                        <span class="member-name">${player.name}</span>
+                        <span class="member-scores">(H: ${player.handicap}, 실제: ${player.actualScore}, 최종: ${player.finalScore.toFixed(1)})</span>
+                    </div>
+                `).join('');
+                
+                return `
+                    <tr class="${rankClass}">
+                        <td><span class="rank-badge">${currentRank}</span></td>
+                        <td><strong>${team.teamName}</strong></td>
+                        <td class="team-members">${playersInfo}</td>
+                        <td><strong>${team.totalActualScore}</strong></td>
+                        <td><strong>${team.totalAppliedHandicap.toFixed(1)}</strong></td>
+                        <td class="team-total">${team.totalFinalScore.toFixed(1)}</td>
+                    </tr>
+                `;
+            }).join('');
+            
+            resultsSection.style.display = 'block';
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function savePlayers() {
+            localStorage.setItem('_saved_players_', JSON.stringify(teams));
+        }
+
+        function loadPlayers() {
+            const savedPlayers = localStorage.getItem('_saved_players_');
+            if (savedPlayers) {
+                return JSON.parse(savedPlayers);
+            } else {
+                return [
+                    { name: '57,58,60년생', players: [
+                        {name: '루시하부자', handicap: 0, score: 0}, {name: '교주', handicap: 0, score: 0}, {name: '초롱', handicap: 0, score: 0}, {name: '모두다OK', handicap: 0, score: 0}
+                    ]},
+                    { name: '61년생', players: [
+                        {name: '블랙스톤', handicap: 0, score: 0}, {name: '이레', handicap: 0, score: 0}, {name: '베티', handicap: 0, score: 0}, {name: '엘사', handicap: 0, score: 0}
+                    ]},
+                    { name: '62.63,64년', players: [
+                        {name: '흥부자', handicap: 0, score: 0}, {name: '단비', handicap: 0, score: 0}, {name: '나싱글', handicap: 0, score: 0}, {name: '캔디걸', handicap: 0, score: 0}
+                    ]},
+                    { name: '66,67,68년생', players: [
+                        {name: '마리우스', handicap: 0, score: 0}, {name: '에스더', handicap: 0, score: 0}, {name: '해피해피니스', handicap: 0, score: 0}, {name: '루카스', handicap: 0, score: 0}
+                    ]},
+                    { name: '69년생', players: [
+                        {name: '알파고', handicap: 0, score: 0}, {name: '이글워리어', handicap: 2.4, score: 0}, {name: '탱크주의', handicap: 0, score: 0}, {name: '해피GO', handicap: 0, score: 0}
+                    ]},
+                    { name: '70, 71년생', players: [
+                        {name: '조가여', handicap: 0, score: 0}, {name: '예삐고', handicap: 0, score: 0}, {name: '추니', handicap: -3.5, score: 0}, {name: '토마토', handicap: 9.2, score: 0}
+                    ]},
+                    { name: '72, 73', players: [
+                        {name: '베글이글', handicap: 4.3, score: 0}, {name: '내공아', handicap: 4.9, score: 0}, {name: '삼스', handicap: 5.6, score: 0}, {name: '신꽃', handicap: 0, score: 0}
+                    ]},
+                    { name: '74,75,77년 막내라인', players: [
+                        {name: '알랑간', handicap: 0, score: 0}, {name: '예니짱', handicap: 0, score: 0}, {name: '릴리', handicap: 0, score: 0}, {name: '천사', handicap: 4.1, score: 0}
+                    ]},
+                ];
+            }
+        }
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTeams();
+        });
+    </script>
+</body>
+</html>
